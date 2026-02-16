@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Appfinanças"
              x:Class="Appfinanças.App">
+
     
         <Application.Resources>
             <ResourceDictionary>
@@ -41,5 +42,13 @@
             </ResourceDictionary>
         </Application.Resources>
 
-   
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+>>>>>>> f002a4dd645eac68944a8611a0bc0184bbb40749
 </Application>

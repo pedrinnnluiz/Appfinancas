@@ -1,3 +1,4 @@
+
 ﻿using Appfinanças.Models;
 
 namespace Appfinanças;
@@ -107,4 +108,76 @@ public partial class MainPage : ContentPage
             await CarregarExtrato();
         }
     }
-}
+
+﻿
+       namespace Appfinanças
+    {
+        public partial class MainPage : ContentPage
+        {
+            int saldo;
+            int entrada;
+            int totalGastos;
+            List<string> extrato = new();
+
+            List<int> diasRecebimento = new() { 15, 30 };
+
+            public MainPage()
+            {
+                InitializeComponent();
+
+                int salario = Preferences.Get("Salario", 0);
+                int gastosFixos = Preferences.Get("Gastos", 0);
+
+            saldo = salario - gastosFixos;
+
+            string data = DateTime.Today.ToString("dd/MM");  
+                
+                resultadoLabel.Text = $"Saldo inicial: {saldo}";
+            }
+
+        private void CalcularSaldo_Clicked(object sender, EventArgs e)
+        {
+            if (int.TryParse(EntradaEntry.Text, out int valor))
+            {
+                saldo += valor;
+
+
+                extrato.Clear();
+
+                string data = DateTime.Today.ToString("dd/MM");
+
+                
+                extrato.Add($"{data} 💰 Valor de entrada: {saldo}");
+                resultadoLabel.Text = $"Saldo restante: {saldo}";
+
+                ExtratoView.ItemsSource = null;
+                ExtratoView.ItemsSource = extrato;
+            }
+        }
+
+            private void AdicionarGasto_Clicked(object sender, EventArgs e)
+            {
+            if (int.TryParse(GastoEntry.Text, out int valor))
+            {
+                saldo -= valor;
+
+                string data = DateTime.Today.ToString("dd/MM");
+                extrato.Add($"{data} 💸 Gasto: -{valor}");
+                Preferences.Set("Extrato", string.Join("|", extrato));
+
+                string extratoSalvo = Preferences.Get("Extrato", "");
+                if (!string.IsNullOrEmpty(extratoSalvo)) 
+                { extrato = extratoSalvo.Split('|').ToList(); ExtratoView.ItemsSource = extrato; }
+
+                resultadoLabel.Text = $"Saldo restante: {saldo}";
+
+                    ExtratoView.ItemsSource = null;
+                    ExtratoView.ItemsSource = extrato;
+
+                    GastoEntry.Text = "";
+                }
+
+            }
+        }
+    }
+
