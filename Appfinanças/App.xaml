@@ -39,16 +39,10 @@
                     <Setter Property="TextColor" Value="{StaticResource PrimaryColor}"/>
                 </Style>
 
-            </ResourceDictionary>
-        </Application.Resources>
+     
 
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+  
+       
         </ResourceDictionary>
     </Application.Resources>
->>>>>>> f002a4dd645eac68944a8611a0bc0184bbb40749
 </Application>

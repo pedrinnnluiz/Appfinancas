@@ -56,44 +56,7 @@ public class DatabaseService
     {
         return _database.DeleteAsync<Usuario>(id);
     }
-
-
-
-
-using SQLite;
-using Appfinancas.Models;
-using System.IO;
-
-namespace Appfinanças.Models
-{
-    public class DatabaseService
-    {
-        readonly SQLiteAsyncConnection _db;
-
-        public DatabaseService(string dbPath)
-        {
-            _db = new SQLiteAsyncConnection(dbPath);
-            _db.CreateTableAsync<Usuario>().Wait();
-        }
-
-        public Task<int> AddUsuarioAsync(Usuario usuario)
-        {
-            return _db.InsertAsync(usuario);
-        }
-
-        public Task<Usuario> GetUsuarioAsync(string nome, string senha)
-        {
-            return _db.Table<Usuario>()
-                      .Where(u => u.Nome == nome && u.Senha == senha)
-                      .FirstOrDefaultAsync();
-        }
-
-        public Task<int> DeleteUsuarioAsync(string nome)
-        {
-            return _db.Table<Usuario>()
-                      .Where(u => u.Nome == nome)
-                      .DeleteAsync();
-        }
-    }
->>>>>>> f002a4dd645eac68944a8611a0bc0184bbb40749
 }
+
+
+

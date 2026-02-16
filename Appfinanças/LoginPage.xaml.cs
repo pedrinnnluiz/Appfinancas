@@ -1,16 +1,16 @@
-<<<<<<< HEAD
+
 using Appfinanças.Models;
 
-=======
-using Appfinancas.Models;
+
+
 using Appfinanças.Models;
->>>>>>> f002a4dd645eac68944a8611a0bc0184bbb40749
+
 namespace Appfinanças;
 
 public partial class LoginPage : ContentPage
 {
     DatabaseService db;
-<<<<<<< HEAD
+
 
     public LoginPage()
     {
@@ -33,10 +33,10 @@ public partial class LoginPage : ContentPage
             UsuarioEntry.Text,
             SenhaEntry.Text);
 
-        
+
         if (usuario != null)
         {
-          
+
             if (usuario.Salario > 0)
             {
                 await Navigation.PushAsync(new MainPage(usuario));
@@ -49,7 +49,7 @@ public partial class LoginPage : ContentPage
             return;
         }
 
-        
+
         bool cadastrar = await DisplayAlert(
             "Usuário não encontrado",
             "Deseja cadastrar?",
@@ -75,7 +75,7 @@ public partial class LoginPage : ContentPage
 
         await db.AddUsuarioAsync(novoUsuario);
 
-       
+
         usuario = await db.GetUsuarioAsync(
             UsuarioEntry.Text,
             SenhaEntry.Text);
@@ -122,59 +122,7 @@ public partial class LoginPage : ContentPage
         }
     }
 
+
 }
-=======
-    public LoginPage()
-    {
-        InitializeComponent();
-    }
-
-
-    private async void Login_Clicked(object sender, EventArgs e)
-
-
-    {
-
-        if(string.IsNullOrWhiteSpace(UsuarioEntry.Text) || string.IsNullOrWhiteSpace(SenhaEntry.Text))
-
-        {
-            await DisplayAlert("Erro!", "Digite um Usuário e senha para prosseguir", "Ok");
-
-            return;
-        }   
-        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "app.db");
-        var db = new DatabaseService(dbPath);
-
-        var usuario = await db.GetUsuarioAsync(UsuarioEntry.Text, SenhaEntry.Text);
-
-        if (usuario != null)
-        {
-            await Navigation.PushAsync(new SetupFinanceiro());
-        }
-
-        else
-
-        {
-            bool cadastrar = await DisplayAlert("Usuario não encontrado", "Faça um cadastro", "Sim", "Não");
-
-            if (cadastrar)
-            {
-                await db.AddUsuarioAsync(new Usuario
-                { Nome = UsuarioEntry.Text, Senha = SenhaEntry.Text });
-
-                await DisplayAlert("Cadastro concluído com sucesso", "Sucesso", "OK!");
-                await Navigation.PushAsync(new SetupFinanceiro());
-            }
-            else {
-                
-                await DisplayAlert("Aviso", "Você precisa ter um cadastro para entrar.", "Ok"); }
-        }
-    }
-            private async void Excluir_Clicked(object sender, EventArgs e) 
-    { await db.DeleteUsuarioAsync(UsuarioEntry.Text);
-        await DisplayAlert("Conta excluída", "Seu cadastro foi removido.", "Ok"); }
-}
-   
-
 
 
