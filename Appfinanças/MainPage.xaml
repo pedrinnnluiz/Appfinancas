@@ -3,90 +3,165 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Appfinanças.MainPage"
-    Title="Controle Financeiro">
+    Title="Controle Financeiro"
+    BackgroundColor="#F4F6FA">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
             <!-- SALDO -->
-            <Label
-                x:Name="resultadoLabel"
-                FontSize="22"
-                FontAttributes="Bold"
-                TextColor="Green" />
+            <Frame BackgroundColor="#1E88E5"
+                   CornerRadius="15"
+                   Padding="20"
+                   HasShadow="True">
 
-            <!-- DESCRIÇÃO -->
-            <Entry
-                x:Name="DescricaoEntry"
-                Placeholder="Descrição (Ex: Mercado, Lanche, Salário)"
-                Margin="0,10,0,0" />
+                <VerticalStackLayout>
+                    <Label Text="Saldo Atual"
+                           TextColor="White"
+                           FontSize="14"/>
 
-            <!-- ENTRADA -->
-            <Entry
-                x:Name="EntradaEntry"
-                Placeholder="Valor de entrada"
-                Keyboard="Numeric" />
+                    <Label x:Name="resultadoLabel"
+                           Text="R$ 0,00"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- CARD ENTRADA -->
+            <Frame CornerRadius="15"
+                   BackgroundColor="White"
+                   Padding="15"
+                   HasShadow="True">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Adicionar Entrada"
+                           FontAttributes="Bold"
+                           TextColor="#1E88E5"/>
+
+                    <Entry
+                        x:Name="DescricaoEntry"
+                        Placeholder="Descrição"
+                        BackgroundColor="#F0F0F0"
+                        Margin="0,5"
+                        HeightRequest="45"/>
+
+                    <Entry
+                        x:Name="EntradaEntry"
+                        Placeholder="Valor de entrada"
+                        Keyboard="Numeric"
+                        BackgroundColor="#F0F0F0"
+                        HeightRequest="45"/>
+
+                    <Picker
+                        x:Name="CategoriaPicker"
+                        Title="Escolha a categoria"
+                        BackgroundColor="#F0F0F0"
+                        HeightRequest="45">
+                        <Picker.Items>
+                            <x:String>Mercado</x:String>
+                            <x:String>Transporte</x:String>
+                            <x:String>Lazer</x:String>
+                            <x:String>Fast Food</x:String>
+                            <x:String>Faculdade</x:String>
+                            <x:String>Game</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Button
+                        Text="Adicionar Entrada"
+                        BackgroundColor="#1E88E5"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="45"
+                        Clicked="AdicionarEntrada_Clicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- CARD GASTO -->
+            <Frame CornerRadius="15"
+                   BackgroundColor="White"
+                   Padding="15"
+                   HasShadow="True">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Adicionar Gasto"
+                           FontAttributes="Bold"
+                           TextColor="#E53935"/>
+
+                    <Entry
+                        x:Name="GastoEntry"
+                        Placeholder="Valor de gasto"
+                        Keyboard="Numeric"
+                        BackgroundColor="#F0F0F0"
+                        HeightRequest="45"/>
+
+                    <Button
+                        Text="Adicionar Gasto"
+                        BackgroundColor="#E53935"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="45"
+                        Clicked="AdicionarGasto_Clicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- EXTRATO -->
+            <Label Text="Extrato"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,0"/>
 
             <Button
-                Text="Adicionar Entrada"
-                Clicked="AdicionarEntrada_Clicked" />
-
-            <!-- GASTO -->
-            <Entry
-                x:Name="GastoEntry"
-                Placeholder="Valor de gasto"
-                Keyboard="Numeric" />
-
-            <Button
-                Text="Adicionar Gasto"
-                Clicked="AdicionarGasto_Clicked" />
-
-            
-            <Label
-                Text="Extrato"
-                FontSize="20"
-                FontAttributes="Bold"
-                Margin="0,20,0,10" />
-
-
-            <Button
-    Text="LimparExtrato"
-    BackgroundColor="Red"
-    TextColor="White"
-    Clicked="LimparExtrato_Clicked" />
+                Text="Limpar Extrato"
+                BackgroundColor="Gray"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="40"
+                Clicked="LimparExtrato_Clicked"/>
 
             <CollectionView x:Name="ExtratoCollection">
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10"
+
+                        <Frame CornerRadius="12"
+                               Padding="12"
                                Margin="5"
-                               BorderColor="LightGray"
-                               CornerRadius="10">
+                               BackgroundColor="White"
+                               HasShadow="True">
 
                             <VerticalStackLayout Spacing="4">
 
-                                
                                 <Label Text="{Binding Tipo}"
-                                       FontAttributes="Bold" />
+                                       FontAttributes="Bold"
+                                       FontSize="15"/>
 
-                                
                                 <Label Text="{Binding Descricao}"
-                                       FontAttributes="Italic"
-                                       TextColor="Gray" />
+                                       TextColor="Gray"
+                                       FontAttributes="Italic"/>
+
+                                <Label Text="{Binding Categoria}"
+                                       FontSize="12"
+                                       TextColor="#1E88E5"/>
 
                                 <Label Text="{Binding Valor, StringFormat='R$ {0:F2}'}"
-                                       FontSize="16" />
+                                       FontSize="16"
+                                       FontAttributes="Bold"/>
 
-                                
                                 <Label Text="{Binding Data, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
-                                       FontSize="12"
-                                       TextColor="DarkGray" />
+                                       FontSize="11"
+                                       TextColor="DarkGray"/>
 
                             </VerticalStackLayout>
 
                         </Frame>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+
             </CollectionView>
 
         </VerticalStackLayout>

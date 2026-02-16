@@ -33,6 +33,7 @@ public partial class MainPage : ContentPage
             {
                 UsuarioId = usuario.Id,
                 Tipo = "Entrada",
+                Categoria = CategoriaPicker.SelectedItem?.ToString() ?? "Outros",
                 Valor = valor,
                 Data = DateTime.Now,
                 Descricao = string.IsNullOrWhiteSpace(DescricaoEntry.Text)
@@ -65,6 +66,7 @@ public partial class MainPage : ContentPage
             {
                 UsuarioId = usuario.Id,
                 Tipo = "Saída",
+                Categoria = CategoriaPicker.SelectedItem?.ToString() ?? "Outros",
                 Valor = valor,
                 Data = DateTime.Now,
                 Descricao = string.IsNullOrWhiteSpace(DescricaoEntry.Text) 
