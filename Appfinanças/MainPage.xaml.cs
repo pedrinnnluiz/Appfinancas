@@ -1,5 +1,4 @@
-
-﻿using Appfinanças.Models;
+using Appfinanças.Models;
 
 namespace Appfinanças;
 
@@ -22,7 +21,6 @@ public partial class MainPage : ContentPage
         _ = CarregarExtrato();
     }
 
-
     private async void AdicionarEntrada_Clicked(object sender, EventArgs e)
     {
         if (decimal.TryParse(EntradaEntry.Text, out decimal valor))
@@ -37,16 +35,15 @@ public partial class MainPage : ContentPage
                 Valor = valor,
                 Data = DateTime.Now,
                 Descricao = string.IsNullOrWhiteSpace(DescricaoEntry.Text)
-                 ? "Entrada"
-        :       DescricaoEntry.Text
-            }); 
+                    ? "Entrada"
+                    : DescricaoEntry.Text
+            });
 
             await db.UpdateUsuarioAsync(usuario);
 
             resultadoLabel.Text = $"Saldo atual: R$ {usuario.Saldo:F2}";
             EntradaEntry.Text = "";
             DescricaoEntry.Text = "";
-
 
             await CarregarExtrato();
         }
@@ -69,8 +66,9 @@ public partial class MainPage : ContentPage
                 Categoria = CategoriaPicker.SelectedItem?.ToString() ?? "Outros",
                 Valor = valor,
                 Data = DateTime.Now,
-                Descricao = string.IsNullOrWhiteSpace(DescricaoEntry.Text) 
-                ? "Saída" : DescricaoEntry.Text
+                Descricao = string.IsNullOrWhiteSpace(DescricaoEntry.Text)
+                    ? "Saída"
+                    : DescricaoEntry.Text
             });
 
             await db.UpdateUsuarioAsync(usuario);
@@ -78,7 +76,6 @@ public partial class MainPage : ContentPage
             resultadoLabel.Text = $"Saldo atual: R$ {usuario.Saldo:F2}";
             GastoEntry.Text = "";
             DescricaoEntry.Text = "";
-           
 
             await CarregarExtrato();
         }
@@ -92,27 +89,20 @@ public partial class MainPage : ContentPage
     {
         var transacoes = await db.GetTransacoesAsync(usuario.Id);
         ExtratoCollection.ItemsSource = transacoes;
-
     }
 
-    private async void  LimparExtrato_Clicked(object sender, EventArgs e)
+    private async void LimparExtrato_Clicked(object sender, EventArgs e)
     {
         bool confirmar = await DisplayAlert(
-        "Confirmação",
-        "Deseja realmente apagar todo o extrato?",
-        "Sim",
-        "Não");
+            "Confirmação",
+            "Deseja realmente apagar todo o extrato?",
+            "Sim",
+            "Não");
 
         if (confirmar)
         {
             await db.LimparTransacoesAsync(usuario.Id);
-
             await CarregarExtrato();
         }
     }
-
-﻿
-     
-        }
-    
-
+}

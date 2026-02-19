@@ -2,33 +2,62 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appfinanças.SetupFinanceiro"
+             BackgroundColor="#F4F6FA"
              Title="Setup Financeiro">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30"
-            Spacing="20"
+            Spacing="25"
             VerticalOptions="Center">
 
+        
+
+           
             <Label 
-                Text="Para o primeiro passo, digite os valores solicitados nos campos abaixo."
-                FontSize="20"
+                Text="Configuração Inicial"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="#1E88E5"
                 HorizontalTextAlignment="Center"/>
 
-            <Entry
-                x:Name="SalarioEntry"
-                Placeholder="Digite o valor do salário"
-                Keyboard="Numeric"
-                HeightRequest="50"/>
+         
+            <Label 
+                Text="Digite seus valores iniciais para começarmos o controle financeiro."
+                TextColor="Gray"
+                FontSize="14"
+                HorizontalTextAlignment="Center"/>
 
-            <Entry
-                x:Name="GastosEntry"
-                Placeholder="Digite seus gastos fixos"
-                Keyboard="Numeric"
-                HeightRequest="50"/>
+          
+            <Frame CornerRadius="20"
+                   Padding="20"
+                   BackgroundColor="White"
+                   HasShadow="True">
 
+                <VerticalStackLayout Spacing="18">
+
+                    <Entry
+                        x:Name="SalarioEntry"
+                        Placeholder="Digite o valor do salário"
+                        Keyboard="Numeric"
+                        BackgroundColor="#F4F6FA"
+                        HeightRequest="50"/>
+
+                    <Entry
+                        x:Name="GastosEntry"
+                        Placeholder="Digite seus gastos fixos"
+                        Keyboard="Numeric"
+                        BackgroundColor="#F4F6FA"
+                        HeightRequest="50"/>
+
+                </VerticalStackLayout>
+            </Frame>
+
+        
             <Button
-                Text="Avançar para valores"
+                Text="Avançar"
+                BackgroundColor="#1E88E5"
+                TextColor="White"
                 CornerRadius="15"
                 HeightRequest="55"
                 FontAttributes="Bold"

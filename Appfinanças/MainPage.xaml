@@ -9,7 +9,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
-            <!-- SALDO -->
+            
             <Frame BackgroundColor="#1E88E5"
                    CornerRadius="15"
                    Padding="20"
@@ -28,7 +28,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- CARD ENTRADA -->
+          
             <Frame CornerRadius="15"
                    BackgroundColor="White"
                    Padding="15"
@@ -55,10 +55,12 @@
                         HeightRequest="45"/>
 
                     <Picker
-                        x:Name="CategoriaPicker"
-                        Title="Escolha a categoria"
-                        BackgroundColor="#F0F0F0"
-                        HeightRequest="45">
+    x:Name="CategoriaPicker"
+    Title="Escolha a categoria"
+    BackgroundColor="#F0F0F0"
+    TextColor="Black"
+    TitleColor="Gray"
+    HeightRequest="50">
                         <Picker.Items>
                             <x:String>Mercado</x:String>
                             <x:String>Transporte</x:String>
@@ -79,7 +81,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- CARD GASTO -->
+            
             <Frame CornerRadius="15"
                    BackgroundColor="White"
                    Padding="15"
@@ -108,7 +110,7 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- EXTRATO -->
+            
             <Label Text="Extrato"
                    FontSize="20"
                    FontAttributes="Bold"
@@ -127,35 +129,52 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
-                        <Frame CornerRadius="12"
-                               Padding="12"
-                               Margin="5"
-                               BackgroundColor="White"
-                               HasShadow="True">
+                        <Frame CornerRadius="15"
+                   Padding="15"
+                   Margin="8"
+                   BackgroundColor="#E3F2FD"
+                   HasShadow="True">
 
-                            <VerticalStackLayout Spacing="4">
+                            <Grid ColumnDefinitions="*,Auto"
+                      RowDefinitions="Auto,Auto,Auto">
 
-                                <Label Text="{Binding Tipo}"
-                                       FontAttributes="Bold"
-                                       FontSize="15"/>
+                               
+                                <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Text="{Binding Descricao}"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#0D47A1"/>
 
-                                <Label Text="{Binding Descricao}"
-                                       TextColor="Gray"
-                                       FontAttributes="Italic"/>
+                                
+                                <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Text="{Binding Valor, StringFormat='R$ {0:F2}'}"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           HorizontalOptions="End"/>
 
-                                <Label Text="{Binding Categoria}"
-                                       FontSize="12"
-                                       TextColor="#1E88E5"/>
+                                
+                                <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Text="{Binding Categoria}"
+                           FontSize="13"
+                           TextColor="#1565C0"/>
 
-                                <Label Text="{Binding Valor, StringFormat='R$ {0:F2}'}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"/>
+                               
+                                <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding Tipo}"
+                           FontSize="13"
+                           HorizontalOptions="End"/>
 
-                                <Label Text="{Binding Data, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
-                                       FontSize="11"
-                                       TextColor="DarkGray"/>
+                                <Label Grid.Row="2"
+                           Grid.ColumnSpan="2"
+                           Text="{Binding Data, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+                           FontSize="11"
+                           TextColor="Gray"/>
 
-                            </VerticalStackLayout>
+                            </Grid>
 
                         </Frame>
 
@@ -163,6 +182,7 @@
                 </CollectionView.ItemTemplate>
 
             </CollectionView>
+
 
         </VerticalStackLayout>
     </ScrollView>
